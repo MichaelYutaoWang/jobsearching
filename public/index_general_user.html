@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title> Job Searching Tool </title>
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+      <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+      <link href="stylesheets/styles.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"> </script>
+      <script src="js/bootstrap.js"> </script>
+      <script src="js/name_actions.js"> </script>
+  </head>
+
+  <body>
+		  <table style="width: 100%;background-color:#25313D;">
+		    <tr>
+		      <td align="center"><img style="width:30%" class="img-responsive" src="images/bluemix_logo.jpeg" alt="Cloudant logo"/></td>
+		      <td align="center"><br/>
+		      	<a href="/">
+		      		<img style="width:40%" class="img-responsive" src="images/jobsearching_logo.png" alt="Job Searching Tool Logo" />
+		      		<h3 style="color: #FFFFFA;">Job Searching Tool</h3>
+		      	</a>
+		      </td>
+		      <td align="center"><img style="width:30%" class="img-responsive" src="images/cloudant_logo.png" alt="Cloudant logo" /></td>
+		    </tr>
+		  </table>
+
+			<div>
+	      	<legend class="resizables" style="background-color:darkgreen"> &nbsp;&nbsp;&nbsp;&nbsp; General User </legend>
+	      	
+	      	<table class="table" style="width:100%;">
+	      		<tr>
+	      			<td style="width:25%;">
+ 		    				<form action="update_general_user" method="post">
+         					<input type="hidden" id="_id" name="_id" value="##ID##" />
+         					<input type="hidden" id="username" name="username" value="##NAME##" />
+         					<input type="hidden" id="password" name="password" value="##PASSWORD##" />
+			            <div class="form-group">
+			            	<dl class="dl-horizontal">
+			            		<dt>Name</dt>
+			            		<dd>
+			            			<input class="form-control" type="text" style="width:305px;" id="username2" name="username2" value="##NAME##" />
+			            		</dd>
+			            		<dt>Password</dt>
+			            		<dd>
+			            			<input class="form-control" type="password" style="width:305px;" id="password2" name="password2" value="##PASSWORD##" />
+			            		</dd>
+			            		<dt>Email</dt>
+			            		<dd>
+		     				        <input class="form-control" type="text" style="width:305px;" id="email" name="email" value="##EMAIL##" />
+			            		</dd>
+			            		<dt>Phone</dt>
+			            		<dd>
+		     				        <input class="form-control" type="text" style="width:305px;" id="phone" name="phone" value="##PHONE##" />
+			            		</dd>
+			            		<dt>Keywords</dt>
+			            		<dd>
+		     				        <input class="form-control" type="text" style="width:305px;" id="keywords" name="keywords" value="##KEYWORDS##" />
+			            		</dd>
+			            		<dt>CV</dt>
+			            		<dd>
+												<textarea name="cv" id="cv" cols="50" rows="4" style="width:305px;">##CV##</textarea>
+			            		</dd>
+			            		<dt></dt>
+			            		<dd>
+		       				      <input type="submit" value="Save" class="btn btn-default" />
+			            		</dd>
+     				      	</dl>
+			            </div>
+	      				</form>
+	      			</td>
+	      			<td style="width:75%;">
+	      				<table class="table">
+	      					<tr><th>Job Information</th></tr>
+	      					<!--##JOBINFORMATION##-->
+	      					<!--
+	      					<tr><td><textarea cols="110" rows="6">##KEYWORDS## ##JOBINFORMATION##</textarea></td></tr>
+	      					-->
+	      				</table>
+	      			</td>
+	      		</tr>
+	      	</table>
+	    </div>
+	 </body>
+</html>

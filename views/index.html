@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title> Job Searching Tool </title>
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+      <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+      <link href="stylesheets/styles.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"> </script>
+      <script src="js/bootstrap.js"> </script>
+      <script src="js/name_actions.js"> </script>
+      
+      <style>
+	      article p:first-letter {
+	    		font-size: 18px;
+				}
+      </style>
+
+  </head>
+
+  <body>
+			<div class="navbar navbar-inverse navbar-fixed-top navigation_bar" style="background-color:#152935;">
+				<div class="content" align="center" style="background-color:#25313D;">
+	        <table style="width: 100%;">
+	          <tr>
+	            <td align="center"><img style="width:30%" class="img-responsive" src="images/bluemix_logo.jpeg" alt="Cloudant logo"/></td>
+				      <td align="center"><br/>
+				      	<img style="width:40%" class="img-responsive" src="images/jobsearching_logo.png" alt="Job Searching Tool Logo" />
+				      	<h3 style="color: #FFFFFA;">Job Searching Tool</h3>
+				      </td>
+	            <td align="center"><img style="width:30%" class="img-responsive" src="images/cloudant_logo.png" alt="Cloudant logo" /></td>
+	          </tr>
+	        </table>
+	      </div>
+
+	      <button data-target=".navHeaderCollapse" data-toggle="collapse" class="navbar-toggle">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+
+				<table class="table" style="width:100%;">
+	      	<tr>
+	      		<td style="width:20%;"></td>
+	      		<td><button class="btn btn-success crud" type="button" onclick="login_administrator()"> Administrator </button></td>
+	      		<td><button class="btn btn-success crud" type="button" onclick="login_general_user()"> General User </button></td>
+	      		<td><button class="btn btn-success crud" type="button" onclick="login_enterprise_user()"> Enterprise User </button></td>
+	      		<td style="width:20%;"></td>
+	      	</tr>
+	      </table>
+
+	    </div>
+
+      <div class="container form_details">
+      		<div id="vision_form" style="display:block">
+      			<article>
+	      			<h4>Vision</h4>
+	      			<p>
+	      				What is the most important thing or the biggest challenge to the students who are about to graduate from universities? Definitely finding a satisfactory job! However, in fact, it is not easy, and students actually spend much time to try to get jobs. What can we do now to help students finding jobs and starting their career? In general, we search jobs on some websites which publish jobs for all people who are looking for jobs. These websites include Seek, SJS, TradeMe, etc. Some students know more about these websites, and other students only know a few. As we known, some websites also can automatically search jobs information based on keywords and send it to the user's mailbox, and some websites not.
+	      			</p>
+	      			<p>
+	      				We would like to develop a tool that can help the students to automatically search job information according to what they have learned and the skills they are good at; and push these job information to the mailboxes of the students; it should be very convenient and useful. At the same time, the job information that some students have got can also be shared with their good friends or other students through the tool; thus the students can get more accurate job information in time. To the corporations, they can also publish job information; and the information can be automatically matched with the students who have suitable skills, and pushed directly to the students. This tool would be a win-win outcome for both sides of the job information.
+	      			</p>
+	      			<hr>
+	      			<p align="right">Group Members: YUTAO WANG, YU XIAO, XIANZE HE and YANG GAO.</p>
+      			</article>
+      		</div>
+      	
+      	
+          <!-- administrator login -->
+          <div id="login_administrator_form" style="display:none">
+            <form class="form-horizontal" action="login_administrator" method="POST" name="form_admin" id="form_admin">
+              <fieldset>
+                <legend class="resizables"> Administrator Login </legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Enter user name:</label>
+                    <div class="col-lg-10">
+                      <input type="text" style="width:400px" autocomplete="off" class="form-control" id="username" name="username" placeholder="User Name" value="admin"/>
+                    </div>
+                    <label class="col-lg-2 control-label">Enter password:</label>
+                    <div class="col-lg-10">
+                      <input type="password" style="width:400px" autocomplete="off" class="form-control" id="password" name="password" placeholder="User Name" value="admin123"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button id="login_administrator_button" type="submit" class="btn btn-danger">Login</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+
+          <div id="login_general_user_form" style="display:none">
+            <form class="form-horizontal" action="/login_general_user" method="POST" name="form_guser" id="form_guser">
+              <fieldset>
+                <legend class="resizables"> General User Login </legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Enter user name:</label>
+                    <div class="col-lg-10">
+                      <input type="text" style="width:400px" autocomplete="off" class="form-control" id="username" name="username" placeholder="User Name" value="user1"/>
+                    </div>
+                    <label class="col-lg-2 control-label">Enter password:</label>
+                    <div class="col-lg-10">
+                      <input type="password" style="width:400px" autocomplete="off" class="form-control" id="password" name="password" placeholder="User Name" value="user123"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button id="login_general_user_button" type="submit" class="btn btn-info" onclick="submit_guser_login()">Login</button>
+                    <button id="register_general_user_button" type="submit" class="btn btn-danger" onclick="submit_guser_register()">Register</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+
+          <div id="login_enterprise_user_form" style="display:none">
+            <form class="form-horizontal" action="/login_enterprise_user" method="POST" name="form_euser" id="form_euser">
+              <fieldset>
+                <legend class="resizables"> Enterprise User Login </legend>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Enter user name:</label>
+                    <div class="col-lg-10">
+                      <input type="text" style="width:400px" autocomplete="off" class="form-control" id="username" name="username" placeholder="User Name" value="company1"/>
+                    </div>
+                    <label class="col-lg-2 control-label">Enter password:</label>
+                    <div class="col-lg-10">
+                      <input type="password" style="width:400px" autocomplete="off" class="form-control" id="password" name="password" placeholder="User Name" value="company123"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button id="login_enterprise_user_button" type="submit" class="btn btn-info" onclick="submit_euser_login()">Login</button>
+                    <button id="register_enterprise_user_button" type="submit" class="btn btn-danger" onclick="submit_euser_register()">Register</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+        <script>
+        	
+        	function submit_guser_login()
+        	{
+        		document.getElementById("form_guser").action = "login_general_user";
+        		return true;
+        	}
+        	function submit_guser_register()
+        	{
+        		document.getElementById("form_guser").action = "register_general_user";
+        		return true;
+        	}
+        	
+        	function submit_euser_login()
+        	{
+        		document.getElementById("form_euser").action = "login_enterprise_user";
+        		return true;
+        	}
+        	function submit_euser_register()
+        	{
+        		document.getElementById("form_euser").action = "register_enterprise_user";
+        		return true;
+        	}
+        	
+	  			function login_administrator()
+	  			{
+	  				document.getElementById("login_administrator_form").style.display="block";
+	  				document.getElementById("login_general_user_form").style.display="none";
+	  				document.getElementById("login_enterprise_user_form").style.display="none";
+	  				document.getElementById("vision_form").style.display="none";
+	  			}
+
+	  			function login_general_user()
+	  			{
+	  				document.getElementById("login_administrator_form").style.display="none";
+	  				document.getElementById("login_general_user_form").style.display="block";
+	  				document.getElementById("login_enterprise_user_form").style.display="none";
+	  				document.getElementById("vision_form").style.display="none";
+	  			}
+
+	  			function login_enterprise_user()
+	  			{
+	  				document.getElementById("login_administrator_form").style.display="none";
+	  				document.getElementById("login_general_user_form").style.display="none";
+	  				document.getElementById("login_enterprise_user_form").style.display="block";
+	  				document.getElementById("vision_form").style.display="none";
+	  			}
+  		</script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{
+    "cloudantNoSQLDB": [
+        {
+            "credentials": {
+                "username": "c9a93bf8-8ba5-41b2-82e3-df1905d73c6c-bluemix",
+                "password": "bf55ec2d701c72f1aee7fdc447c5ef8ff37e82608d515b5765928f2ad0661dfa",
+                "host": "c9a93bf8-8ba5-41b2-82e3-df1905d73c6c-bluemix.cloudant.com",
+                "port": 443,
+                "url": "https://c9a93bf8-8ba5-41b2-82e3-df1905d73c6c-bluemix:bf55ec2d701c72f1aee7fdc447c5ef8ff37e82608d515b5765928f2ad0661dfa@c9a93bf8-8ba5-41b2-82e3-df1905d73c6c-bluemix.cloudant.com"
+            },
+            "syslog_drain_url": null,
+            "volume_mounts": [],
+            "label": "cloudantNoSQLDB",
+            "provider": null,
+            "plan": "Lite",
+            "name": "jobsearching5-cloudantNoSQLDB",
+            "tags": [
+                "data_management",
+                "ibm_created",
+                "lite",
+                "ibm_dedicated_public"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title> Job Searching Tool </title>
+      <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+      <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+      <link href="stylesheets/styles.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"> </script>
+      <script src="js/bootstrap.js"> </script>
+      <script src="js/name_actions.js"> </script>
+      
+      <style>
+        .data_name {
+            text-align: center;
+            color: blue;
+            font-size: 18px;
+            width: 25%;
+        }
+        
+        .mytable {
+        	border: 10px solid white;
+        	padding: 10px;
+        }
+        
+				#myUL {
+				  list-style-type: none;
+				  padding: 0;
+				  margin: 0;
+				}
+
+				#myUL li a {
+				  border: 0px solid #fff;
+				  margin-top: 0px;
+				  background-color: #fff;
+				  padding: 12px;
+				  text-decoration: none;
+				  font-size: 18px;
+				  color: black;
+				  display: block
+				}
+
+				#myUL li a:hover:not(.header) {
+				  background-color: #0000ff;
+				}
+    	</style>
+
+  </head>
+
+  <body>
+		  <table style="width: 100%;background-color:#25313D;">
+		    <tr>
+		      <td align="center"><img style="width:30%" class="img-responsive" src="images/bluemix_logo.jpeg" alt="Cloudant logo" /></td>
+		      <td align="center"><br/>
+		      	<a href="/">
+		      		<img style="width:40%" class="img-responsive" src="images/jobsearching_logo.png" alt="Job Searching Tool Logo" />
+		      		<h3 style="color: #FFFFFA;">Job Searching Tool</h3>
+		      	</a>
+		      </td>
+		      <td align="center"><img style="width:30%" class="img-responsive" src="images/cloudant_logo.png" alt="Cloudant logo"/></td>
+		    </tr>
+		  </table>
+
+			<div>
+	      	<legend class="resizables" style="background-color:orange"> &nbsp;&nbsp;&nbsp;&nbsp; Administrator </legend>
+	      	
+	      	<table class="table" style="width:100%;">
+	      		<tr>
+	      			<td style="width:20%;">
+                 <ul id="myUL" style="background-color:gary">
+                   <li><a onclick="showJobWebsites()"> Job Websites </a></li>
+                 	 <li><a onclick="showJobKeywords()"> Job Keywords </a></li>
+                 	 <li><a onclick="showJobList()"> Job List </a></li>
+                 	 <li><a onclick="showGeneralUsers()"> General Users </a></li>
+                 	 <li><a onclick="showEnterpriseUsers()"> Enterprise Users </a></li>
+                 </ul>
+                 
+                 <br/><br/>
+                 <form class="form-horizontal" action="reload_database" method="get" name="form_reload" id="form_reload">
+                 	 <button id="reload_database_button" type="button" class="btn btn-success" onclick="reloadCloudDB()">Refresh Data</button>
+                 </form>
+                 
+	      			</td>
+	      			
+	      			<td style="width:30%;">
+	      				<table style="border:0;">
+      	          	<tr id="JobWebsites" style="display:none"><td><ul id="myUL"><!-- ##JobWebsites## --></ul></td></tr>
+      	          	<tr id="JobKeywords" style="display:none"><td><ul id="myUL"><!-- ##JobKeywords## --></ul></td></tr>
+      	          	<tr id="JobList" style="display:none"><td><ul id="myUL"><!-- ##JobList## --></ul></td></tr>
+      	          	<tr id="GeneralUsers" style="display:none"><td><ul id="myUL"><!-- ##GeneralUsers## --></ul></td></tr>
+      	          	<tr id="EnterpriseUsers" style="display:none"><td><ul id="myUL"><!-- ##EnterpriseUsers## --></ul></td></tr>
+		            </table>
+	      			</td>
+	      			
+	      			<td style="width:50%;">
+	      				<div>
+    							<h4 style="color:blue;font-weight:bold;">Job Searching</h4>
+    							<hr />
+    							<table class="mytable">
+	    							<tr>
+					      			<td class="mytable"><button class="btn btn-success crud" type="button" onclick="startSearching()"> Start </button></td>
+					      			<td class="mytable"><button class="btn btn-danger crud" type="button" onclick="stopSearching()"> Stop </button></td>
+					      			<td></td>
+					      		</tr>
+	    							<tr>
+					      			<td class="mytable"><button class="btn btn-warning crud" type="button" onclick="getSearchingStatus()"> Status </button></td>
+					      			<td class="mytable"><button class="btn btn-info crud" type="button" onclick="getSearchingInformation()"> Information </button></td>
+					      			<td></td>
+					      		</tr>
+					      		<tr>
+					      			<td colspan="3"><textarea id="searching_info" cols="60" rows="4" style="width:100%;"></textarea></td>
+					      		</tr>
+				      		</table>
+	      			</td>
+	      		</tr>
+	      	</table>
+	    </div>
+	    
+	    <script>
+	    	function setSearchingInformation(info) {
+	    		document.getElementById("searching_info").value = info;
+	    	}
+	    	function startSearching() {
+	    		var xmlhttp = new XMLHttpRequest();
+	    		xmlhttp.onreadystatechange = function() {
+	    			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	    				setSearchingInformation(xmlhttp.responseText);
+	    			}
+	    		}
+	    		xmlhttp.open("GET", "/start_searching", true);
+	    		xmlhttp.send();
+	    		return true;
+	    	}
+	    	function stopSearching() {
+	    		var xmlhttp = new XMLHttpRequest();
+	    		xmlhttp.open("GET", "/stop_searching", true);
+	    		xmlhttp.send();
+	    		xmlhttp.onreadystatechange = function() {
+	    			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	    				setSearchingInformation(xmlhttp.responseText);
+	    			}
+	    		}
+	    		return true;
+	    	}
+	    	function getSearchingStatus() {
+	    		var xmlhttp = new XMLHttpRequest();
+	    		xmlhttp.open("GET", "/get_searching_status", true);
+	    		xmlhttp.send();
+	    		xmlhttp.onreadystatechange = function() {
+	    			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	    				setSearchingInformation(xmlhttp.responseText);
+	    			}
+	    		}
+	    		return true;
+	    	}
+	    	function getSearchingInformation() {
+	    		var xmlhttp = new XMLHttpRequest();
+	    		xmlhttp.open("GET", "/get_searching_info", true);
+	    		xmlhttp.send();
+	    		xmlhttp.onreadystatechange = function() {
+	    			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	    				setSearchingInformation(xmlhttp.responseText);
+	    			}
+	    		}
+	    		return true;
+	    	}
+
+	    	function reloadCloudDB() {
+	    		var xmlhttp = new XMLHttpRequest();
+	    		xmlhttp.open("GET", "/reload_database", true);
+	    		xmlhttp.send();
+	    		return true;
+	    	}
+	    	
+	    	function showJobWebsites() {
+	    		document.getElementById("JobWebsites").style.display="block";
+  				document.getElementById("JobKeywords").style.display="none";
+  				document.getElementById("JobList").style.display="none";
+  				document.getElementById("GeneralUsers").style.display="none";
+  				document.getElementById("EnterpriseUsers").style.display="none";
+	    	}
+	    	function showJobKeywords() {
+	    		document.getElementById("JobWebsites").style.display="none";
+  				document.getElementById("JobKeywords").style.display="block";
+  				document.getElementById("JobList").style.display="none";
+  				document.getElementById("GeneralUsers").style.display="none";
+  				document.getElementById("EnterpriseUsers").style.display="none";
+	    	}
+	    	function showJobList() {
+	    		document.getElementById("JobWebsites").style.display="none";
+  				document.getElementById("JobKeywords").style.display="none";
+  				document.getElementById("JobList").style.display="block";
+  				document.getElementById("GeneralUsers").style.display="none";
+  				document.getElementById("EnterpriseUsers").style.display="none";
+	    	}
+	    	function showGeneralUsers() {
+	    		document.getElementById("JobWebsites").style.display="none";
+  				document.getElementById("JobKeywords").style.display="none";
+  				document.getElementById("JobList").style.display="none";
+  				document.getElementById("GeneralUsers").style.display="block";
+  				document.getElementById("EnterpriseUsers").style.display="none";
+	    	}
+	    	function showEnterpriseUsers() {
+	    		document.getElementById("JobWebsites").style.display="none";
+  				document.getElementById("JobKeywords").style.display="none";
+  				document.getElementById("JobList").style.display="none";
+  				document.getElementById("GeneralUsers").style.display="none";
+  				document.getElementById("EnterpriseUsers").style.display="block";
+	    	}
+	    	
+	    </script>
+  </body>
+</html>
